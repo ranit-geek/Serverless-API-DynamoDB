@@ -8,21 +8,13 @@ const uuid=require("uuid")
 module.exports.create = (event, context, callback) => {
   const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
-  if (typeof data.text !== 'string') {
-    console.error('Validation Failed');
-    callback(null, {
-      statusCode: 400,
-      headers: { 'Content-Type': 'text/plain' },
-      body: 'Couldn\'t create the user',
-    });
-    return;
-  }
+  
 
   const params = {
     TableName: "newusers",
     Item: {
       id: uuid.v1(),
-      text: data.text,
+      details: data,
       checked: false,
       createdAt: timestamp,
       updatedAt: timestamp,

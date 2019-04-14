@@ -19,13 +19,44 @@ provider:
 
 
 functions:
-   create:
-     handler: api/handler.create
+  create:
+     handler: api/create.create
      events: 
        - http: 
-             path: create
+             path: users
              method: POST
              cors: true
+  delete:
+     handler: api/delete.delete
+     events: 
+       - http: 
+             path: users/{id}
+             method: DELETE
+             cors: true
+  update:
+     handler: api/update.update
+     events: 
+       - http: 
+             path: users/{id}
+             method: PUT
+             cors: true
+  getall:
+     handler: api/getall.getall
+     events: 
+       - http: 
+             path: users
+             method: GET
+             cors: true
+  get:
+     handler: api/get.get
+     events: 
+       - http: 
+             path: users/{id}
+             method: GET
+             cors: true
+  
+   
+    
 
 resources:
   Resources:
@@ -45,10 +76,3 @@ resources:
           ReadCapacityUnits: 1   
           WriteCapacityUnits: 1
         TableName: "newusers"
-
-
-
-
-  
-
-
