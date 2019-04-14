@@ -8,7 +8,7 @@ module.exports.update=(event,context,callback)=>{
     const timestamp = new Date().getTime();
     const data = JSON.parse(event.body);
     const params = {
-        TableName: "newusers",                    //TODO get this from environment variable 
+        TableName: process.env.DYNAMODB_TABLE,                
         Key: {
           id: event.pathParameters.id,
         },

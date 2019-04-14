@@ -6,6 +6,8 @@ service: apidynamodb # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs8.10
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${opt:stage, self:provider.stage}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -15,7 +17,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-east-1:019518631191:table/newusers"      # NOTE: Get this from environment variable
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"     
 
 
 functions:
@@ -75,4 +77,4 @@ resources:
         ProvisionedThroughput:   # Make your throughput according to the usecase, this is just for test
           ReadCapacityUnits: 1   
           WriteCapacityUnits: 1
-        TableName: "newusers"                # NOTE: Get this from environment variable
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
