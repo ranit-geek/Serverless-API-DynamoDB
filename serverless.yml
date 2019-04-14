@@ -15,7 +15,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-east-1:019518631191:table/newusers"    
+      Resource: "arn:aws:dynamodb:us-east-1:019518631191:table/newusers"      # NOTE: Get this from environment variable
 
 
 functions:
@@ -75,4 +75,4 @@ resources:
         ProvisionedThroughput:   # Make your throughput according to the usecase, this is just for test
           ReadCapacityUnits: 1   
           WriteCapacityUnits: 1
-        TableName: "newusers"
+        TableName: "newusers"                # NOTE: Get this from environment variable

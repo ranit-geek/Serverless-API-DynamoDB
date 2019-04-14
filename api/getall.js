@@ -6,7 +6,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.getall=(event,context,callback)=>{
     const params={
-        TableName: "newusers",
+        TableName: "newusers",          //TODO get this from environment variable 
     }
 
     dynamoDb.scan(params,(error,data)=>{
