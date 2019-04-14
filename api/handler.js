@@ -2,11 +2,10 @@
 
 
 const AWS = require("aws-sdk")
-
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const uuid=require("uuid")
 
 module.exports.create = (event, context, callback) => {
-  const dynamoDb = new AWS.DynamoDB.DocumentClient();
-  const uuid=require("uuid")
   const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
   if (typeof data.text !== 'string') {
@@ -14,7 +13,7 @@ module.exports.create = (event, context, callback) => {
     callback(null, {
       statusCode: 400,
       headers: { 'Content-Type': 'text/plain' },
-      body: 'Couldn\'t create the todo item.',
+      body: 'Couldn\'t create the user',
     });
     return;
   }
@@ -37,7 +36,7 @@ module.exports.create = (event, context, callback) => {
       callback(null, {
         statusCode: error.statusCode || 501,
         headers: { 'Content-Type': 'text/plain' },
-        body: 'Couldn\'t create the todo item.',
+        body: 'Couldn\'t create the user.',
       });
       return;
     }
